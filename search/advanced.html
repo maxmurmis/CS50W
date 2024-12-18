@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <style>
+        .link {
+            display: block; 
+            text-align: right; 
+            color: blue;
+        }
+        #search {
+            border-radius: 6px;
+            border:1px solid;
+            padding:6px;
+            margin: 10px;
+            height: 20px;
+            width: 400px;
+            display: flex; 
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        #image {
+            display: block; 
+            margin: 0 auto;
+            height: 100px;
+            width: 280px;
+        }
+        #advanced {
+            background-color:rgb(53, 122, 232); 
+            color:white; 
+            border: 1px solid;
+            padding: 6px;
+            height: 30px;
+            width: 120px;
+            border-radius: 3px;
+            font-family: Arial;
+            font-size: 11px;
+            font-weight: 700;
+            font-style: normal;
+            line-height: 11px;
+            font-stretch: 100%;
+            font-variant: normal;         
+        }
+
+        div {
+            padding: 15px;
+        }
+        </style>
+    </head>
+    <body>
+        <br/>
+        <a class="link" href="index.html">Google Search</a>
+        <br/>
+        <div>
+        <h4 style="text-align: left">Find pages with...</h2>            
+        <form action="https://www.google.com/search" style="text-align: left">
+                ...all of these words: <input id="search" type="text" name="as_q" placeholder="Type here">
+                ...this exact word or phrase: <input id="search" type="text" name="as_epq" placeholder="Type here">
+                ...any of these words: <input id="search" type="text" name="as_oq" placeholder="Type here">
+                ...none of these words: <input id="search" type="text" name="as_eq" placeholder="Type here">
+            <br/>
+            <input id="advanced" type="submit" value="Advanced Search">
+        </div>
+        </form>               
+    </body>
+</html>

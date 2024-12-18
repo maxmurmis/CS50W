@@ -1,0 +1,100 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    {{auction.title}}
+{% endblock %}
+
+{% block body %}
+    <div style="padding:10px">
+        <h2>{{auction.title}}</h2>
+        <img src="{{auction.image}}" alt="{{auction.title}}" style="width: 600px; height:300px; padding:10px">
+        <br><br>
+        <strong>Category: </strong><a href="{% url 'category_listings' auction.category %}">{{auction.category}}</a>
+        <br><br>
+        <strong>Created by: </strong>{{auction.user}}
+        <br><br>
+        <strong>Item description:</strong> {{auction.description|safe}}
+        <br><br>
+        <strong>Current bid:</strong> ${{auction.price}}
+        <br><br>
+
+        {% if user.is_authenticated %}
+
+        {% if not auction.closed %}
+        <form action="{%url 'new_bid' auction.id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="bid_amount" placeholder="Place your bid">
+            <button type="submit" class="btn btn-primary">Bid</button>
+        </form>
+        {% else %}
+        <div style="color: red; font-weight: bold;">
+            {{ message_closed }}
+        </div>
+        {% endif %}
+        <br>
+
+        <h4>Comments</h4>
+        <div style="width: 600px; height:200px; padding:10px; border: 1px ridge gainsboro; font-style: italic; background-color: aliceblue">
+            {% if comments %}
+                {% for comment in comments %}
+                    {{comment.user}}: "{{comment.commentary}}" ({{comment.timestamp}})
+                    <br>
+                {% endfor %} 
+            {% else %}
+            There are no comments yet for this item.
+            {% endif %}   
+        </div>
+        <br>
+        <form action="{% url 'comment' auction.id %}" method="post">
+            {% csrf_token %}
+            <textarea name="comment" placeholder="Submit your comment or question" rows="3" cols="60"></textarea>
+            <br>
+            <button type="submit">Post your comment</button>
+            <br>
+        </form>
+
+        {% if message_comment %}
+        <div style="color: green; font-weight: bold;">
+            {{ message_comment }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div style="color: red; font-weight: bold;">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if message %}
+        <div style="color: green; font-weight: bold;">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <br>
+
+        <form action="{% url 'add_watchlist' auction.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Add to Watchlist</button>
+        </form>
+
+        <br>
+
+        {% if auction.user == request.user and not auction.closed %}
+        <form action="{% url 'close' auction.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" style="background-color: red;">Close auction</button>
+        </form>
+        {% endif %}
+
+        {% if message_winner %}
+        <div style="color: green; font-weight: bold;">
+            {{ message_winner }}
+        </div>
+        {% endif %}
+
+        {% else %}
+            Register to bid or to add to your watchlist.
+        {% endif %}
+    </div>
+{% endblock %}

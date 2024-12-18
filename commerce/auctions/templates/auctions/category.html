@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h4>Categories</h4>
+    <br>
+    {% for category in categories %}
+    <ul class="row" style="list-style: none; padding: 0; margin:10px">
+        <li>
+            <a href="{% url 'category_listings' category %}" style="font-family: 'Trebuchet MS'; font-size: larger; font-weight: bold;">{{category}}</a>
+        </li>
+    </ul>
+    {% endfor %}
+    
+    
+{% endblock %}
