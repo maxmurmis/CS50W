@@ -59,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify({
           recipients: recipients,
           subject: subject,
-          body: body
+          body: body,
+          read: false
       }),
     })
   
@@ -177,7 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const mail = document.createElement('div');
         mail.innerHTML= `<h6>${emails[i]['subject']}</h6>
                         <p>To: ${emails[i]['recipients']}</p>
-                        <p>${emails[i]['timestamp']}</p>`;
+                        <p>${emails[i]['timestamp']}</p>
+                        <button id="open-${emails[i]['id']}">Open</button>`;
         mail.className= "not-read";
         emailDiv.appendChild(mail);
       }
