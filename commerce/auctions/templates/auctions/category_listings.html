@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h4>Auctions in "{{category}}"</h4>
+    <br>
+    <ul class="row" style="list-style: none; padding: 0; margin:10px">
+
+        {% if not listings %}
+        <div style="color: red; font-weight: bold;">
+            There are no active listings in this category yet.
+        </div>
+        {% endif %}
+
+        {% for listing in listings %}
+            <li class="col-4" style="border: 1px solid gainsboro; padding:10px; margin-bottom: 10px; margin-right: 10px;">
+                <a href="{% url 'entry' listing.id %}" style="font-family: 'Trebuchet MS'; font-size: larger; font-weight: bold;">{{listing.title}}</a>
+                <br>
+                <strong>Current bid:</strong> ${{listing.price}}
+                <br>
+                <div style="font-size:x-small">
+                    Created on {{listing.timestamp}} by {{listing.user}}
+                </div>
+                <img src="{{listing.image}}" alt="{{listing.title}}" style="width: 100%; height:auto; padding:10px">
+            </li>
+        {% endfor %}
+    </ul>
+    
+    
+{% endblock %}

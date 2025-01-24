@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h4>Watchlist </h4>
+    <br>
+    <ul class="row" style="list-style: none; padding: 0; margin:10px">
+        {% if not watchlist %}
+        <div style="color: red; font-weight: bold;">
+            There are no active listings in your watchlist yet.
+        </div>
+        {% endif %}
+
+        {% for listing in watchlist %}
+            <li class="col-4" style="border: 1px solid black; padding:10px; margin-bottom: 10px;">
+                <a href="{% url 'entry' listing.id %}">{{listing.title}}</a>
+                <br>
+                <strong>Current bid:</strong> ${{listing.price}}
+                <br>
+                <img src="{{listing.image}}" alt="{{listing.title}}" style="width: 300px; height:150px; padding:10px">
+                <br>
+                <form action="{% url 'remove_watchlist' listing.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Remove from Watchlist</button>
+                </form>
+            </li>
+        {% endfor %}    
+    </ul>
+    
+{% endblock %}

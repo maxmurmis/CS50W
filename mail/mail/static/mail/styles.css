@@ -1,0 +1,42 @@
+textarea {
+    min-height: 400px;
+}
+
+.read {
+    background-color: rgb(153, 151, 151);
+    border: 0.5px solid black;
+    margin-top: 10px;
+    padding: 10px;
+    max-width: 25%;
+    border-radius: 3%;
+} 
+
+.not-read {
+    background-color: rgb(255, 255, 255);
+    border: 0.5px solid black;
+    margin-top: 10px;
+    padding: 10px;
+    max-width: 25%;
+    border-radius: 3%;
+} 
+
+#emails-view{
+    display: block;
+}
+
+.accessed-mail {
+    background-color: rgb(177, 197, 233);
+    border: 0.5px solid black;
+    margin-top: 10px;
+    padding: 10px;
+    max-width: 70%;
+    border-radius: 3%;
+    font: Garamond;
+}
+
+button {
+    border-radius: 3% !important;
+    background-color: beige;
+    padding: 5px;
+    font: times new roman;
+}
